@@ -1,0 +1,6 @@
+<ul>
+<% items.forEach(()=>{%>
+    <dd> <a href="/item/<%=item.id%>"></a><%= item.name %></dd>
+    <dd> <%= item.price %></dd>
+<% }) %>
+</ul>

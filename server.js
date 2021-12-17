@@ -1,36 +1,30 @@
 const express = require('express')
-require('dotenv').config()
-const host=process.env.HOST
-const port=process.env.PORT
-const default_loin_name=process.env.LOGIN_NAME
-const default_password=process.env.PASSWORD
-// const profile=process.env.PROFILE
+const dotenv = require('dotenv')
+// require('dotenv').config()
+dotenv.config()
+const host = process.env.HOST
+const port = process.env.PORT
+// routes.jsを読み込む
+const routes = require('./routes')
 
-const app=express()
+
+const app = express()
 //public フォルダを許可
-app.use(express.static(__dirname+'/public'))
+app.use(express.static(__dirname + '/public'))
 //URLエンコード
-app.use(express.urlencoded({extended:true}))
-
-app.post('/auth',(req,res)=>{
-    let message='ログインできません'
-    const loin_name=req.body.loin_name
-    const password=req.body.password
-    console.log(loin_name)
-    console.log(password)
-    if(loin_name==default_loin_name&&password==default_password){
-        message='ログイン'
-    }
-    res.send(message)
-})
+app.use(express.urlencoded({ extended: true }))
 
 
-app.get('/',(req,res)=>{
-    res.send('Hwllo YSE!!')
-})
-app.get('/profile',(req,res)=>{
-    res.send('This is profile page')
-})
-app.listen(port,host,()=>{
-    console.log('http://'+host+':'+port)
+
+const layouts = require('express-ejs-layouts')
+app.set('layout', 'layouts/default');
+
+// テンプレートエンジンをEJSにする
+app.set('view engine', 'ejs')
+app.use(layouts)
+
+// routes.jsを使う
+app.use(routes)
+app.listen(port, host, () => {
+    console.log('http://' + host + ':' + port)
 })
