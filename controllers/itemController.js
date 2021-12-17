@@ -1,5 +1,5 @@
 const item = require('../models/item')
-exports.inem=(req,res) => {
+exports.index=(req,res) => {
     let data={}
     data.title='商品一覧'
     data.items=item.values

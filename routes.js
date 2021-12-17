@@ -6,14 +6,15 @@ const ItemController = require('./controllers/itemController')
 // const item = require('./models/item')
 const router = express.Router()
 // const profile=process.env.PROFILE
-const default_login_name = process.env.LOGIN_NAME
-const default_passsword = process.env.PASSWORD
+// const default_login_name = process.env.LOGIN_NAME
+// const default_passsword = process.env.PASSWORD
 
-router.get('/login', (req, res) => {
-    res.render('login/login.ejs')
-})
+// router.get('/login', (req, res) => {
+//     res.render('login/login.ejs')
+// })
 router.post('/auth',loginController.auth)
 
+router.get('/login', loginController.index)
 
 router.get('/',homeController.index)
 router.get('/profile',homeController.profile)
